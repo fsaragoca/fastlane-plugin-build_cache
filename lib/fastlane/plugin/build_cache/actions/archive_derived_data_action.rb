@@ -14,7 +14,8 @@ module Fastlane
         zip_final_path = File.join(workspace_path, build_identifier)
 
         files_to_delete = [File.join(derived_data_path, 'ModuleCache'),
-                           File.join(derived_data_path, 'Logs')]
+                           File.join(derived_data_path, 'Logs'),
+                           File.join(derived_data_path, 'Build', 'Intermediates')]
         files_to_delete << zip_tmp_path
         files_to_delete << zip_final_path
 
