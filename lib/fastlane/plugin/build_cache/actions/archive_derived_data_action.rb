@@ -12,10 +12,18 @@ module Fastlane
 
         zip_tmp_path = File.join(derived_data_path_components.join('/'), build_identifier)
         zip_final_path = File.join(workspace_path, build_identifier)
+        build_intermediates_path = File.join(derived_data_path, 'Build', 'Intermediates')
 
         files_to_delete = [File.join(derived_data_path, 'ModuleCache'),
-                           File.join(derived_data_path, 'Logs'),
-                           File.join(derived_data_path, 'Build', 'Intermediates')]
+                           File.join(derived_data_path, 'Logs')]
+
+        code_coverage_path = File.join(build_intermediates_path, 'CodeCoverage')
+        if File.exist?(code_coverage_path)
+          files_to_delete << File.join(code_coverage_path, 'Intermediates')
+        else
+          files_to_delete << build_intermediates_path
+        end
+
         files_to_delete << zip_tmp_path
         files_to_delete << zip_final_path
 
